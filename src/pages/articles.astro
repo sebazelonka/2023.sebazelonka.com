@@ -1,0 +1,31 @@
+---
+import BlogPost from "../components/BlogPost.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const allPosts = await Astro.glob("../pages/articles/*.md");
+
+const pageTitle = "Articles";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h2>... and my new Astro site!</h2>
+
+  <p>
+    I am working through Astro's introductory tutorial. This is the second page
+    on my website, and it's the first one I built myself!
+  </p>
+
+  <p>
+    This site will update as I complete more of the tutorial, so keep checking
+    back and see how my journey is going!
+  </p>
+
+  {
+    allPosts.map((post) => (
+      <BlogPost
+        url={post.url}
+        title={post.frontmatter.title}
+        date={post.frontmatter.date}
+      />
+    ))
+  }
+</BaseLayout>
